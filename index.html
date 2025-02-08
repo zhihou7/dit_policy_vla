@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Visual-Language-Action Learning">
+  <meta name="keywords" content="Robot Policy Learning, Visual-Language-Action, Diffusion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Visual-Language-Action Learning</title>
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Visual-Language-Action Learning">
+  <meta name="twitter:description" content="Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Visual-Language-Action Learning">
+
+  <link rel="stylesheet" href="styles.css">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+<!-- 
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div> -->
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- \author{Zhi Hou$^1$\footnotemark[1] \ \ \ \ Tianyi Zhang$^{2,1}$\footnotemark[1] \ \ \ \ Yuwen Xiong$^{1}$ \ \ \ \ Hengjun Pu$^{3,1}$ \ \ \ \ Chengyang Zhao$^{4,1}$ \\ 
+\textbf{Ronglei Tong$^{5}$ \ \ \ \ Yu Qiao$^{1}$ \ \ \ \ Jifeng Dai$^{6,1}$ \ \ \ \ Yuntao Chen$^7$}\footnotemark[2] \\
+$^1$ Shanghai AI Lab \ \ \ \
+$^2$ 
+College of Computer Science and Technology, Zhejiang University \\
+$^3$ MMLab, The Chinese University of Hong Kong  \
+$^4$ Peking University  \  \
+$^5$ SenseTime Research \\
+$^6$ Tsinghua University \ \ 
+$^7$ Center for Artificial Intelligence and Robotics, HKISI, CAS \\
+} -->
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Diffusion Transformer Policy: 
+            Scaling Diffusion Transformer for Generalist Visual-Language-Action Learning</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="">Zhi Hou</a><sup>1</sup>*,</span>
+            <span class="author-block">
+              <a href="">Tianyi Zhang</a><sup>2,1</sup>*,</span>
+            <span class="author-block">
+              <a href="">Yuwen Xiong</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+                <a href="">Hengjun Pu</a><sup>3,1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="">Chengyang Zhao</a><sup>4</sup>,
+              </span>
+              <span class="author-block">
+                <a href="">Ronglei Tong</a><sup>5</sup>,
+              </span>
+              <span class="author-block">
+                <a href="">Yu Qiao</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="">Jifeng Dai</a><sup>6,1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="">Yuntao Chen</a><sup>7</sup>†
+              </span>
+              
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Shanghai AI Lab</span>
+            <span class="author-block"><sup>2</sup>College of Computer Science and Technology, Zhejiang University</span>
+            <span class="author-block"><sup>3</sup>MMLab, The Chinese University of Hong Kong</span>
+            
+            <span class="author-block"><sup>4</sup>Peking University</span>
+            <span class="author-block"><sup>5</sup>SenseTime Research</span>
+            <span class="author-block"><sup>6</sup>Tsinghua University</span>
+            <span class="author-block"><sup>7</sup>Center for Artificial Intelligence and Robotics, HKISI, CAS</span>
+            
+            <!-- <span class="author-block"><sup>2</sup>Google Research</span> -->
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2410.15959"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/zhihou7/dit_policy_vla"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video> -->
+      <p><img class="img-fluid" alt="teaser" src="./static/images/barchart_horizon.png"></p>
+      <h2 class="subtitle has-text-centered">
+
+        Simulation Benchmarks Comparison
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<!-- <section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/steve.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/chair-tp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/shiba.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/fullbody.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/blueshirt.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-mask">
+          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/mask.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-coffee">
+          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/coffee.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/toby2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recent large visual-language action models pretrained on diverse robot datasets have demonstrated the potential for generalizing to new environments with a few in-domain data. However, those approaches usually predict individual discretized or continuous action by a small action head, which limits the ability in handling diverse action spaces. 
+In contrast, we model the continuous action sequence with a large multi-modal diffusion transformer, dubbed as Diffusion Transformer Policy, in which we directly denoise action chunks by a large transformer model rather than a small action head for action embedding. 
+By leveraging the scaling capability of transformers, the proposed approach can effectively model continuous end-effector actions across large diverse robot datasets, and achieve better generalization performance. 
+Extensive experiments demonstrate the effectiveness and generalization of Diffusion Transformer Policy on Maniskill2, Libero, Calvin and SimplerEnv, as well as the real-world Franka arm, achieving consistent better performance on Real-to-Sim benchmark SimplerEnv, real-world Franka Arm and Libero compared to OpenVLA and Octo. 
+Specifically, without bells and whistles, the proposed approach achieves state-of-the-art performance with only a single third-view camera stream in the Calvin task ABC->D, improving the average number of tasks completed in a row of 5 to 3.6, and the pretraining stage significantly facilitates the success sequence length on the Calvin by over 1.2. 
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <!-- <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div> -->
+        <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/video_demo.m4v"
+                  type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <p><img class="img-fluid" alt="teaser" src="./static/images/pipeline.png"></p>
+        <h2 class="subtitle has-text-centered">
+  
+          Model architecture
+        
+      </div>
+    </div> -->
+    
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Real Franka Demonstration</h2>
+    <p class="content">Here, we illustrate the input frames that are inputted into the model. And the video has thus been accelearted by around 5 times. All experiments are 10-shot finetuning and the training samples are provided in the video above.</p>
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/open_box_record_video_20241114201549.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">open the box and pick up the green block inside the box</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/pick_banana_and_insert_144144.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">pick up the banana and insert into the pen container</div>
+          </div>
+        </div>
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/pouring_coffee_beans_20250125145415.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">pick mark cup and pouring coffee beans from cup into bowl</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/open_box_record_video_20241114202328.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">open the box and pick up the green block inside the box</div>
+          </div>
+        </div>
+
+
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/pick_banana_and_insert_144200.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">pick up the banana and insert into the pen container</div>
+          </div>
+        </div>
+
+
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/pouring_coffee_beans_20250126114227.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">pick mark cup and pouring coffee beans from cup into bowl</div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+      <!-- <button class="carousel-control left" onclick="prevSlide()">❮</button>
+          <button class="carousel-control right" onclick="nextSlide()">❯</button> -->
+    </div>
+
+
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/stack_bowls_20241119.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">stack bowls</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/pouring_balls_green-bowl-131447.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">Pouring balls from the bowl into the box</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/pouring_balls_record-123942.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">Pouring balls from the bowl into the box</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/stack_bowls_20241119172644.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">stack bowls</div>
+          </div>
+        </div>
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/pouring_balls_record-123958.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">Pouring balls from the bowl into the box</div>
+          </div>
+        </div>
+
+        <!-- <button class="carousel-control left" onclick="prevSlide()">❮</button>
+        <button class="carousel-control right" onclick="nextSlide()">❯</button> -->
+      </div>
+
+      <script src="script.js"></script>
+
+    </div>
+
+    <div>More tasks are comming.</div>
+  </div>
+  
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Real-to-Sim benchmark SimplerEnv Demonstration</h2>
+    <p class="content">Here, we demonstrate the robust of the proposed model under SimplerEnv. We pretraining on OXE datasets and evaluate on SimplerEnv.</p>
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_-0.08_-0.02_qpos_0.2970907986164093_is_drawer_open_True_has_contact_9.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">open the top drawer, and put the apple into the drawer</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_-0.05_-0.02_qpos_0.1867281049489975_is_drawer_open_True_has_contact_59.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">open the top drawer and pick up the apple into the drawer</div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_0.0_0.0_qpos_0.222.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">open the bottom drawer</div>
+          </div>
+        </div>
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_0.0_0.0_qpos_0.000.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">close the top drawer</div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_0.0_0.0_qpos_0.239.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">open the middle drawer</div>
+          </div>
+        </div>
+
+
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_0.0_0.0_qpos_0.258.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">open the bottom drawer</div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+      <!-- <button class="carousel-control left" onclick="prevSlide()">❮</button>
+          <button class="carousel-control right" onclick="nextSlide()">❯</button> -->
+    </div>
+
+
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_-0.2925_-0.02_n_lift_significant_22_consec_grasp_True_grasped_True.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">pick up the coke can (novel background)</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_-0.2925_0.09_n_lift_significant_13_consec_grasp_True_grasped_True.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">pick up the coke can (novel materials)</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_episode_5_all_obj_keep_height_True_moved_correct_obj_True_moved_wrong_obj_False_near_tgt_obj_True_is_closest_to_tgt_True.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">move the orange near by coke can</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_episode_13_all_obj_keep_height_True_moved_correct_obj_True_moved_wrong_obj_False_near_tgt_obj_True_is_closest_to_tgt_True.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">move the can near by the brush</div>
+          </div>
+        </div>
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_episode_20_all_obj_keep_height_True_moved_correct_obj_True_moved_wrong_obj_False_near_tgt_obj_True_is_closest_to_tgt_True.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">move the can near by the brush</div>
+          </div>
+        </div>
+
+        <!-- <button class="carousel-control left" onclick="prevSlide()">❮</button>
+        <button class="carousel-control right" onclick="nextSlide()">❯</button> -->
+      </div>
+
+
+      <div class="carousel-container">
+        <div class="carousel">
+          <div class="carousel-item">
+            <div class="card">
+              <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/success_obj_episode_2_moved_correct_obj_True_moved_wrong_obj_False_is_src_obj_grasped_True_consecutive_grasp_True_src_on_target_True.mp4" type="video/mp4">
+              </video>
+              <div class="card-content">put eggplant in basket</div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/success_obj_episode_16_moved_correct_obj_True_moved_wrong_obj_False_is_src_obj_grasped_True_consecutive_grasp_True_src_on_target_True.mp4" type="video/mp4">
+              </video>
+              <div class="card-content">put carrot on plate</div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/success_obj_episode_18_moved_correct_obj_True_moved_wrong_obj_False_is_src_obj_grasped_True_consecutive_grasp_True_src_on_target_True.mp4" type="video/mp4">
+              </video>
+              <div class="card-content">put spoon on table</div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/success_obj_episode_7_moved_correct_obj_True_moved_wrong_obj_False_is_src_obj_grasped_True_consecutive_grasp_True_src_on_target_True.mp4" type="video/mp4">
+              </video>
+              <div class="card-content">put eggplant in basket</div>
+            </div>
+          </div>
+  
+  
+          <div class="carousel-item">
+            <div class="card">
+              <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/success_obj_episode_15_moved_correct_obj_True_moved_wrong_obj_False_is_src_obj_grasped_True_consecutive_grasp_True_src_on_target_True.mp4" type="video/mp4">
+              </video>
+              <div class="card-content">put carrot on plate</div>
+            </div>
+          </div>
+  
+          <!-- <button class="carousel-control left" onclick="prevSlide()">❮</button>
+          <button class="carousel-control right" onclick="nextSlide()">❯</button> -->
+
+        
+        </div>
+      <script src="script.js"></script>
+
+    </div>
+    
+
+  </div>
+
+  
+</section>
+
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{hou2024diffusion,
+      title={Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Visual-Language-Action Learning},
+      author={Hou, Zhi and Zhang, Tianyi and Xiong, Yuwen and Pu, Hengjun and Zhao, Chengyang and Tong, Ronglei and Qiao, Yu and Dai, Jifeng and Chen, Yuntao},
+      journal={arXiv preprint arXiv:2410.15959},
+      year={2024}
+    }
+    </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <!-- <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div> -->
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Thanks to <a href="https://nerfies.github.io">Nerfies</a> for the website template.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
