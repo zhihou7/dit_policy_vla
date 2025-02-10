@@ -8,6 +8,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Visual-Language-Action Learning</title>
 
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Visual-Language-Action Learning">
+  <meta name="twitter:description" content="Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Visual-Language-Action Learning">
+
+  <link rel="stylesheet" href="styles.css">
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
   <script>
@@ -331,101 +336,325 @@ Specifically, without bells and whistles, the proposed approach achieves state-o
   <div class="container is-max-desktop">
     <h2 class="title is-3">Real Franka Demonstration</h2>
     <p class="content">Here, we illustrate the input frames that are inputted into the model. And the video has thus been accelearted by around 5 times. All experiments are 10-shot finetuning and the training samples are provided in the video above.</p>
-    <div class="columns is-centered">
-      
-      <div class="column">
-        <div class="content">
-          <p>open the box and pick up the green block inside the box</p>
-          <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/open_box_record_video_20241114201549.mp4" type="video/mp4">
-          </video>
-          <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/open_box_record_video_20241114202328.mp4" type="video/mp4">
-          </video>
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/open_box_record_video_20241114201549.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">open the box and pick up the green block inside the box</div>
+          </div>
         </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/pick_banana_and_insert_144144.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">pick up the banana and insert into the pen container</div>
+          </div>
+        </div>
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/pouring_coffee_beans_20250125145415.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">pick mark cup and pouring coffee beans from cup into bowl</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/open_box_record_video_20241114202328.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">open the box and pick up the green block inside the box</div>
+          </div>
+        </div>
+
+
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/pick_banana_and_insert_144200.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">pick up the banana and insert into the pen container</div>
+          </div>
+        </div>
+
+
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/pouring_coffee_beans_20250126114227.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">pick mark cup and pouring coffee beans from cup into bowl</div>
+          </div>
+        </div>
+
+
       </div>
 
-      <div class="column">
-        <div class="content">
-          <p>pick up the banana and insert into the pen container</p>
-          <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/pick_banana_and_insert_144144.mp4" type="video/mp4">
-          </video>
-          <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/pick_banana_and_insert_144200.mp4" type="video/mp4">
-          </video>
-          
-        </div>
-      </div>
+
+
+      <!-- <button class="carousel-control left" onclick="prevSlide()">❮</button>
+          <button class="carousel-control right" onclick="nextSlide()">❯</button> -->
     </div>
 
 
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/stack_bowls_20241119.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">stack bowls</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/pouring_balls_green-bowl-131447.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">Pouring balls from the bowl into the box</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/pouring_balls_record-123942.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">Pouring balls from the bowl into the box</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/stack_bowls_20241119172644.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">stack bowls</div>
+          </div>
+        </div>
 
-    <div class="columns is-centered">
-      <div class="column">
-        <div class="content">
-          <p>stack bowls</p>
-          <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/stack_bowls_20241119.mp4" type="video/mp4">
-          </video>
-          <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/stack_bowls_20241119172644.mp4" type="video/mp4">
-          </video>
-          
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/pouring_balls_record-123958.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">Pouring balls from the bowl into the box</div>
+          </div>
         </div>
+
+        <!-- <button class="carousel-control left" onclick="prevSlide()">❮</button>
+        <button class="carousel-control right" onclick="nextSlide()">❯</button> -->
       </div>
-      <div class="column">
-        <div class="content">
-          <p>pick mark cup and pouring coffee beans from cup into  bowl</p>
-          <!-- <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/pouring_coffee_beans_20250125114800.mp4" type="video/mp4">
-          </video> -->
-          <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/pouring_coffee_beans_20250125145415.mp4" type="video/mp4">
-          </video>
-          <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/pouring_coffee_beans_20250126114227.mp4" type="video/mp4">
-          </video>
-          
+
+      <script src="script.js"></script>
+
+    </div>
+
+    <div>More tasks are comming.</div>
+  </div>
+  
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Real-to-Sim benchmark SimplerEnv Demonstration</h2>
+    <p class="content">Here, we demonstrate the robust of the proposed model under SimplerEnv. We pretraining on OXE datasets and evaluate on SimplerEnv.</p>
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_-0.08_-0.02_qpos_0.2970907986164093_is_drawer_open_True_has_contact_9.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">open the top drawer, and put the apple into the drawer</div>
+          </div>
         </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_-0.05_-0.02_qpos_0.1867281049489975_is_drawer_open_True_has_contact_59.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">open the top drawer and pick up the apple into the drawer</div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_0.0_0.0_qpos_0.222.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">open the bottom drawer</div>
+          </div>
+        </div>
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_0.0_0.0_qpos_0.000.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">close the top drawer</div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_0.0_0.0_qpos_0.239.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">open the middle drawer</div>
+          </div>
+        </div>
+
+
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_0.0_0.0_qpos_0.258.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">open the bottom drawer</div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+      <!-- <button class="carousel-control left" onclick="prevSlide()">❮</button>
+          <button class="carousel-control right" onclick="nextSlide()">❯</button> -->
+    </div>
+
+
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_-0.2925_-0.02_n_lift_significant_22_consec_grasp_True_grasped_True.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">pick up the coke can (novel background)</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_-0.2925_0.09_n_lift_significant_13_consec_grasp_True_grasped_True.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">pick up the coke can (novel materials)</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_episode_5_all_obj_keep_height_True_moved_correct_obj_True_moved_wrong_obj_False_near_tgt_obj_True_is_closest_to_tgt_True.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">move the orange near by coke can</div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_episode_13_all_obj_keep_height_True_moved_correct_obj_True_moved_wrong_obj_False_near_tgt_obj_True_is_closest_to_tgt_True.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">move the can near by the brush</div>
+          </div>
+        </div>
+
+
+        <div class="carousel-item">
+          <div class="card">
+            <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/success_obj_episode_20_all_obj_keep_height_True_moved_correct_obj_True_moved_wrong_obj_False_near_tgt_obj_True_is_closest_to_tgt_True.mp4" type="video/mp4">
+            </video>
+            <div class="card-content">move the can near by the brush</div>
+          </div>
+        </div>
+
+        <!-- <button class="carousel-control left" onclick="prevSlide()">❮</button>
+        <button class="carousel-control right" onclick="nextSlide()">❯</button> -->
+      </div>
+
+
+      <div class="carousel-container">
+        <div class="carousel">
+          <div class="carousel-item">
+            <div class="card">
+              <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/success_obj_episode_2_moved_correct_obj_True_moved_wrong_obj_False_is_src_obj_grasped_True_consecutive_grasp_True_src_on_target_True.mp4" type="video/mp4">
+              </video>
+              <div class="card-content">put eggplant in basket</div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/success_obj_episode_16_moved_correct_obj_True_moved_wrong_obj_False_is_src_obj_grasped_True_consecutive_grasp_True_src_on_target_True.mp4" type="video/mp4">
+              </video>
+              <div class="card-content">put carrot on plate</div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/success_obj_episode_18_moved_correct_obj_True_moved_wrong_obj_False_is_src_obj_grasped_True_consecutive_grasp_True_src_on_target_True.mp4" type="video/mp4">
+              </video>
+              <div class="card-content">put spoon on table</div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/success_obj_episode_7_moved_correct_obj_True_moved_wrong_obj_False_is_src_obj_grasped_True_consecutive_grasp_True_src_on_target_True.mp4" type="video/mp4">
+              </video>
+              <div class="card-content">put eggplant in basket</div>
+            </div>
+          </div>
+  
+  
+          <div class="carousel-item">
+            <div class="card">
+              <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/success_obj_episode_15_moved_correct_obj_True_moved_wrong_obj_False_is_src_obj_grasped_True_consecutive_grasp_True_src_on_target_True.mp4" type="video/mp4">
+              </video>
+              <div class="card-content">put carrot on plate</div>
+            </div>
+          </div>
+  
+          <!-- <button class="carousel-control left" onclick="prevSlide()">❮</button>
+          <button class="carousel-control right" onclick="nextSlide()">❯</button> -->
+
         
-      </div>
-    </div>
-    <div class="columns is-centered">
-
-
-
-      
-    </div>
-
-    <div class="columns is-centered">
-      <div class="column">
-        <div class="content">
-          <p>Pouring balls from the bowl into the box</p>
-          <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/pouring_balls_green-bowl-131447.mp4" type="video/mp4">
-          </video>
-          <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/pouring_balls_record-123942.mp4" type="video/mp4">
-          </video>
-          <video id="dollyzoom1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/pouring_balls_record-123958.mp4" type="video/mp4">
-          </video>
         </div>
-      </div>
-      
-
-      
-    </div>
-
-
-
+      <script src="script.js"></script>
 
     </div>
-<p class="content"> More tasks are comming </p>
+    
 
   </div>
+
+  
 </section>
+
+
 
 
 <section class="section" id="BibTeX">
