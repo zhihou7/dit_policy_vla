@@ -1,6 +1,9 @@
-# Diffusion Transformer Policy:
+# Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Visual-Language-Action Learning
 
-[![arXiv](https://img.shields.io/badge/arXiv-2406.09246-df2a2a.svg?style=for-the-badge)](https://arxiv.org/abs/2410.15959)
+[![arXiv](https://img.shields.io/badge/arXiv-2406.09246-df2a2a.svg)](https://arxiv.org/abs/2410.15959) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Static Badge](https://img.shields.io/badge/Project-Page-a)](https://zhihou7.github.io/dit_policy_vla/)
+
 
 ### Installation
 
@@ -27,7 +30,8 @@ We provide the corresponding models, that can be utilized for finetuing.
 | Model        |Description                                                                                                 | Checkpoint Path                                |
 | ------------ | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
 | DiT Policy     |  Diffusion Transformer Policy | [Google Drive](https://drive.google.com/file/d/1jaaoT0QGX4xwdzvTr_ki8OJ9-XkNOvub/view?usp=sharing)      |
-| Diffusion MLP Head | Transformer with Diffusion Head Policy  | [Coming]() |
+| DiT Policy     |  Diffusion Transformer Policy (w/o image augmentation) | [Google Drive](https://drive.google.com/file/d/1qpyDYsMrUISve9koP-4_BCSEFgthn70P/view?usp=sharing)      |
+| Diffusion MLP Head | Transformer with Diffusion Head Policy (w/o image augmentation)  | [Google Drive](https://drive.google.com/file/d/1vdWLre4v_MlNEEII6Z97VLGH-3yxmr1O/view?usp=sharing) |
 
 ## Training & Finetuning
 
@@ -129,7 +133,11 @@ This evaluation is based on [SimplerEnv](https://github.com/simpler-env/SimplerE
 | models                                             | ours                 | RT-1-X | RT-2-X | Octo-Base | Octo-Small | OpenVLA |
 
 
-In our experiments, we use the Bridge_orig from tfds in google cloud, in which the image has been resized (480\*512->224\*224) and caused **image distortion**. We think this part might significantly affect the evaluation on bridige.
+In our experiments, we use the Bridge_orig from tfds in google cloud, in which the image has been resized (480\*512->224\*224) and caused **image distortion**. We think this part might significantly affect the evaluation on bridige. **Please notice that RT-2-X is a huge model with web-scale data.**
+
+#### Real Franka Demonstration
+
+Please refer to the [project page](https://zhihou7.github.io/dit_policy_vla/).
 
 ### Acknowledgement
 
