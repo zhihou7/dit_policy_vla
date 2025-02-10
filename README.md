@@ -80,7 +80,7 @@ python scripts/train_diffusion_sim.py --config-name config_diffusion_calvin batc
 | Diffusion Policy from scratch | 78.3 | 92.5% | 68.3 % | 50.5 % | 72.4 % |
 | Octo fine-tuned | 78.9 % | 85.7 % | 84.6% | 51.1 % | 75.1 % |
 | OpenVLA fine-tuned| **84.7 %** | 88.4 % | 79.2 % | 53.7 % | 76.5 % |
-| ours | 84.2% | **96.3%** | **85.4%** | **63.8%** | **82.4%**
+| ours fine-tuned| 84.2% | **96.3%** | **85.4%** | **63.8%** | **82.4%**
 
 
 #### Calvin (ABC->D)
