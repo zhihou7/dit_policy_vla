@@ -1,4 +1,4 @@
-# Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Visual-Language-Action Learning
+# Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Vision-Language-Action Learning
 
 [![arXiv](https://img.shields.io/badge/arXiv-2406.09246-df2a2a.svg)](https://arxiv.org/abs/2410.15959) 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -149,7 +149,7 @@ If you find our code or models useful in your work, please cite [our paper](http
 
 ```bibtex
 @article{hou2024diffusion,
-  title={Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Visual-Language-Action Learning},
+  title={Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Vision-Language-Action Learning},
   author={Hou, Zhi and Zhang, Tianyi and Xiong, Yuwen and Pu, Hengjun and Zhao, Chengyang and Tong, Ronglei and Qiao, Yu and Dai, Jifeng and Chen, Yuntao},
   journal={arXiv preprint arXiv:2410.15959},
   year={2024}
