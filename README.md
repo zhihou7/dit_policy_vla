@@ -1,9 +1,12 @@
-# Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Vision-Language-Action Learning
+# Diffusion Transformer Policy
 
-[![arXiv](https://img.shields.io/badge/arXiv-2406.09246-df2a2a.svg)](https://arxiv.org/abs/2410.15959) 
+[![arXiv](https://img.shields.io/badge/arXiv-2410.15959-df2a2a.svg)](https://arxiv.org/abs/2410.15959) 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Static Badge](https://img.shields.io/badge/Project-Page-a)](https://zhihou7.github.io/dit_policy_vla/)
 
+## Please refer to the extension repo:
+
+## [Dita:Scaling Diffusion Transformer for Generalist Vision-Language-Action Policy](https://github.com/RoboDita/Dita)
 
 ### Installation
 
@@ -149,7 +152,7 @@ If you find our code or models useful in your work, please cite [our paper](http
 
 ```bibtex
 @article{hou2024diffusion,
-  title={Diffusion Transformer Policy: Scaling Diffusion Transformer for Generalist Vision-Language-Action Learning},
+  title={Diffusion Transformer Policy},
   author={Hou, Zhi and Zhang, Tianyi and Xiong, Yuwen and Pu, Hengjun and Zhao, Chengyang and Tong, Ronglei and Qiao, Yu and Dai, Jifeng and Chen, Yuntao},
   journal={arXiv preprint arXiv:2410.15959},
   year={2024}
